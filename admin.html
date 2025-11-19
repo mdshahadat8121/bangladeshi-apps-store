@@ -1,1 +1,1091 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>এডমিন প্যানেল - বাংলাদেশি অ্যাপস</title>
+    <style>
+        :root {
+            --primary-color: #006a4e;
+            --secondary-color: #f42a41;
+            --accent-color: #ff7e00;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --text-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'SolaimanLipi', 'AdorshoLipi', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #004d38 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-nav {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .nav-tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .nav-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .admin-content {
+            padding: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .table th,
+        .table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .table th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .file-upload-area {
+            border: 2px dashed #ddd;
+            padding: 2rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1rem;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary-color);
+            background: #f8f9fa;
+        }
+
+        .screenshot-preview {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .screenshot-preview img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            border: 2px solid #ddd;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--box-shadow);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .upload-progress {
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .manual-upload-guide {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .drive-steps {
+            text-align: left;
+            margin: 1rem 0;
+        }
+
+        .drive-steps ol {
+            padding-left: 1.5rem;
+        }
+
+        .drive-steps li {
+            margin-bottom: 0.5rem;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">এডমিন লগইন</h2>
+        <div class="form-group">
+            <label class="form-label">ইমেইল</label>
+            <input type="email" class="form-control" id="adminEmail" value="mdshahadat81313@gmail.com">
+        </div>
+        <div class="form-group">
+            <label class="form-label">পাসওয়ার্ড</label>
+            <input type="password" class="form-control" id="adminPassword" value="123456">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" style="width: 100%;" onclick="adminLogin()">লগইন</button>
+        </div>
+        <div id="loginMessage"></div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" style="display: none;">
+        <header class="admin-header">
+            <div>
+                <h1>এডমিন প্যানেল</h1>
+                <p>বাংলাদেশি অ্যাপস - অ্যাপ্লিকেশন ম্যানেজমেন্ট</p>
+            </div>
+            <div>
+                <span id="adminWelcome">স্বাগতম, এডমিন!</span>
+                <button class="btn btn-danger" onclick="adminLogout()" style="margin-left: 1rem;">লগআউট</button>
+            </div>
+        </header>
+
+        <nav class="admin-nav">
+            <ul class="nav-tabs">
+                <li class="nav-tab active" data-tab="dashboard">ড্যাশবোর্ড</li>
+                <li class="nav-tab" data-tab="apps">অ্যাপস ম্যানেজমেন্ট</li>
+                <li class="nav-tab" data-tab="addApp">অ্যাপ যোগ করুন</li>
+                <li class="nav-tab" data-tab="settings">সেটিংস</li>
+                <li class="nav-tab" data-tab="users">ব্যবহারকারী</li>
+            </ul>
+        </nav>
+
+        <main class="admin-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <h2>ড্যাশবোর্ড</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalApps">0</div>
+                        <div class="stat-label">মোট অ্যাপস</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalDownloads">0</div>
+                        <div class="stat-label">মোট ডাউনলোড</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalUsers">0</div>
+                        <div class="stat-label">নিবন্ধিত ব্যবহারকারী</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalReviews">0</div>
+                        <div class="stat-label">মোট রিভিউ</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>সাম্প্রতিক অ্যাক্টিভিটি</h3>
+                    <div id="recentActivity">
+                        <!-- Activity will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apps Management Tab -->
+            <div id="apps" class="tab-content">
+                <h2>অ্যাপস ম্যানেজমেন্ট</h2>
+                <div class="card">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>নাম</th>
+                                <th>ক্যাটাগরি</th>
+                                <th>ডাউনলোড</th>
+                                <th>রেটিং</th>
+                                <th>স্ট্যাটাস</th>
+                                <th>একশন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appsTable">
+                            <!-- Apps will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add App Tab -->
+            <div id="addApp" class="tab-content">
+                <h2>নতুন অ্যাপ যোগ করুন</h2>
+                <div class="card">
+                    <form id="addAppForm">
+                        <div class="form-group">
+                            <label class="form-label">অ্যাপ নাম *</label>
+                            <input type="text" class="form-control" id="appName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">ডেভেলপার নাম *</label>
+                            <input type="text" class="form-control" id="appDeveloper" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">বর্ণনা *</label>
+                            <textarea class="form-control" id="appDescription" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">ক্যাটাগরি *</label>
+                            <select class="form-control" id="appCategory" required>
+                                <option value="">সিলেক্ট করুন</option>
+                                <option value="education">শিক্ষা</option>
+                                <option value="finance">ব্যাংকিং</option>
+                                <option value="utility">ইউটিলিটি</option>
+                                <option value="entertainment">বিনোদন</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">আইকন (Emoji) *</label>
+                            <input type="text" class="form-control" id="appIcon" placeholder="📱" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">APK ফাইল *</label>
+                            <div class="file-upload-area" onclick="document.getElementById('apkFile').click()">
+                                <p>APK ফাইল সিলেক্ট করুন (Max: 100MB)</p>
+                                <input type="file" id="apkFile" accept=".apk" style="display: none;" onchange="handleApkUpload(this)">
+                                <div id="apkFileName" style="margin-top: 0.5rem; font-weight: bold;"></div>
+                                <div class="upload-progress" id="apkUploadProgress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="apkProgressFill"></div>
+                                    </div>
+                                    <small id="apkProgressText">প্রস্তুত হচ্ছে...</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Manual Google Drive Upload Section -->
+                        <div class="manual-upload-guide" id="manualUploadGuide" style="display: none;">
+                            <h4 style="color: #856404; margin-bottom: 1rem;">📁 Google Drive আপলোড নির্দেশিকা</h4>
+                            <div class="drive-steps">
+                                <ol>
+                                    <li><strong id="manualFileName">ফাইল</strong> আপনার Google Drive-এ আপলোড করুন</li>
+                                    <li>ফাইলটি রাইট ক্লিক করে "Share" এ ক্লিক করুন</li>
+                                    <li>"General access" থেকে "Anyone with the link" সিলেক্ট করুন</li>
+                                    <li>"Copy link" বাটনে ক্লিক করুন</li>
+                                    <li>লিঙ্কটি নিচের বক্সে পেস্ট করুন</li>
+                                </ol>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Google Drive Share Link</label>
+                                <input type="text" class="form-control" id="googleDriveLink" 
+                                       placeholder="https://drive.google.com/file/d/1ABC123def456/view?usp=sharing">
+                            </div>
+                            <button type="button" class="btn btn-success" onclick="processDriveLink()" style="width: 100%;">
+                                🔗 Drive Link Verify করুন
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">ডাউনলোড লিংক</label>
+                            <input type="url" class="form-control" id="appDownloadLink" placeholder="https://...">
+                            <small style="color: #666;">Google Drive লিঙ্ক অটোমেটিকভাবে যোগ হবে</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">ভার্সন *</label>
+                            <input type="text" class="form-control" id="appVersion" value="1.0.0" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Android ভার্সন *</label>
+                            <input type="text" class="form-control" id="appAndroidVersion" value="5.0+" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">সাইজ *</label>
+                            <input type="text" class="form-control" id="appSize" placeholder="15 MB" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">প্যাকেজ নাম</label>
+                            <input type="text" class="form-control" id="appPackageName" placeholder="com.example.app">
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="appFeatured"> ফিচার্ড অ্যাপ হিসেবে দেখান
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">অ্যাপ সংরক্ষণ করুন</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content">
+                <h2>সাইট সেটিংস</h2>
+                <div class="card">
+                    <form id="siteSettingsForm">
+                        <div class="form-group">
+                            <label class="form-label">সাইট নাম *</label>
+                            <input type="text" class="form-control" id="siteName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">সাইট বর্ণনা *</label>
+                            <textarea class="form-control" id="siteDescription" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">ব্যানার ইমেজ URL</label>
+                            <input type="url" class="form-control" id="bannerImage" placeholder="https://...">
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0;">এডমিন অ্যাকাউন্ট সেটিংস</h3>
+
+                        <div class="form-group">
+                            <label class="form-label">বর্তমান ইমেইল</label>
+                            <input type="email" class="form-control" id="currentEmail" value="mdshahadat81313@gmail.com" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">নতুন ইমেইল</label>
+                            <input type="email" class="form-control" id="newEmail" placeholder="নতুন ইমেইল">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">বর্তমান পাসওয়ার্ড</label>
+                            <input type="password" class="form-control" id="currentPassword">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">নতুন পাসওয়ার্ড</label>
+                            <input type="password" class="form-control" id="newPassword" placeholder="নতুন পাসওয়ার্ড">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">পাসওয়ার্ড নিশ্চিত করুন</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="পাসওয়ার্ড আবার লিখুন">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">সেটিংস সংরক্ষণ করুন</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div id="users" class="tab-content">
+                <h2>ব্যবহারকারী ম্যানেজমেন্ট</h2>
+                <div class="card">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>নাম</th>
+                                <th>ইমেইল</th>
+                                <th>রোল</th>
+                                <th>ভেরিফাইড</th>
+                                <th>যোগদান তারিখ</th>
+                                <th>একশন</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit App Modal -->
+    <div class="modal" id="editAppModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>অ্যাপ এডিট করুন</h3>
+                <button class="close-modal" onclick="closeEditModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editAppForm">
+                    <input type="hidden" id="editAppId">
+                    <div class="form-group">
+                        <label class="form-label">অ্যাপ নাম</label>
+                        <input type="text" class="form-control" id="editAppName" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">ডেভেলপার নাম</label>
+                        <input type="text" class="form-control" id="editAppDeveloper" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">বর্ণনা</label>
+                        <textarea class="form-control" id="editAppDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">স্ট্যাটাস</label>
+                        <select class="form-control" id="editAppStatus" required>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="editAppFeatured"> ফিচার্ড অ্যাপ
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeEditModal()">বাতিল</button>
+                <button class="btn btn-primary" onclick="updateApp()">আপডেট করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Free Google Drive Solution - No API Keys Needed
+        const FREE_DRIVE_CONFIG = {
+            method: 'manual',
+            instructions: 'manual_upload'
+        };
+
+        // Admin authentication
+        function adminLogin() {
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const admin = users.find(user => user.email === email && user.password === password && user.role === 'admin');
+
+            if (admin) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                document.getElementById('adminWelcome').textContent = `স্বাগতম, ${admin.name}!`;
+                loadAdminData();
+            } else {
+                document.getElementById('loginMessage').innerHTML = 
+                    '<div class="alert alert-error">ভুল ইমেইল বা পাসওয়ার্ড!</div>';
+            }
+        }
+
+        function adminLogout() {
+            document.getElementById('loginScreen').style.display = 'block';
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('adminEmail').value = 'mdshahadat81313@gmail.com';
+            document.getElementById('adminPassword').value = '123456';
+        }
+
+        // Tab navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Load admin data
+        function loadAdminData() {
+            loadDashboard();
+            loadAppsTable();
+            loadUsersTable();
+            loadSettingsForm();
+        }
+
+        function loadDashboard() {
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            const downloadLog = JSON.parse(localStorage.getItem('downloadLog')) || [];
+
+            document.getElementById('totalApps').textContent = apps.length;
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('totalReviews').textContent = reviews.length;
+            
+            let totalDownloads = 0;
+            apps.forEach(app => {
+                const downloads = parseInt(app.downloads) || 0;
+                totalDownloads += downloads;
+            });
+            document.getElementById('totalDownloads').textContent = totalDownloads + 'K+';
+
+            // Recent activity
+            const recentActivity = document.getElementById('recentActivity');
+            const recentApps = apps.slice(-5).reverse();
+            
+            if (recentApps.length === 0) {
+                recentActivity.innerHTML = '<p>কোনো অ্যাক্টিভিটি নেই</p>';
+            } else {
+                recentActivity.innerHTML = recentApps.map(app => `
+                    <div style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">
+                        <strong>${app.name}</strong> - ${app.category}
+                        <br><small>ডাউনলোড: ${app.downloads}</small>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function loadAppsTable() {
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            const appsTable = document.getElementById('appsTable');
+            
+            if (apps.length === 0) {
+                appsTable.innerHTML = '<tr><td colspan="6" style="text-align: center;">কোনো অ্যাপ নেই</td></tr>';
+                return;
+            }
+
+            appsTable.innerHTML = apps.map(app => `
+                <tr>
+                    <td>${app.name}</td>
+                    <td>${app.category}</td>
+                    <td>${app.downloads}</td>
+                    <td>${app.rating || 'N/A'}</td>
+                    <td>
+                        <span style="color: ${app.status === 'active' ? 'green' : 'red'};">
+                            ${app.status === 'active' ? 'সক্রিয়' : 'নিষ্ক্রিয়'}
+                        </span>
+                    </td>
+                    <td class="action-buttons">
+                        <button class="btn btn-primary" onclick="editApp(${app.id})">এডিট</button>
+                        <button class="btn btn-danger" onclick="deleteApp(${app.id})">ডিলিট</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadUsersTable() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const usersTable = document.getElementById('usersTable');
+            
+            if (users.length === 0) {
+                usersTable.innerHTML = '<tr><td colspan="6" style="text-align: center;">কোনো ব্যবহারকারী নেই</td></tr>';
+                return;
+            }
+
+            usersTable.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.role === 'admin' ? 'এডমিন' : 'ব্যবহারকারী'}</td>
+                    <td>${user.isVerified ? 'হ্যাঁ' : 'না'}</td>
+                    <td>${user.joinDate}</td>
+                    <td class="action-buttons">
+                        ${user.role !== 'admin' ? 
+                            `<button class="btn btn-danger" onclick="deleteUser(${user.id})">ডিলিট</button>` : 
+                            '<span style="color: #666;">এডমিন</span>'
+                        }
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadSettingsForm() {
+            const settings = JSON.parse(localStorage.getItem('settings')) || {
+                siteName: "বাংলাদেশি অ্যাপস",
+                siteDescription: "বাংলাদেশের জন্য নিরাপদ অ্যাপ্লিকেশন সংগ্রহ",
+                bannerImage: ""
+            };
+
+            document.getElementById('siteName').value = settings.siteName;
+            document.getElementById('siteDescription').value = settings.siteDescription;
+            document.getElementById('bannerImage').value = settings.bannerImage || '';
+        }
+
+        // File upload handlers - FREE Google Drive Integration
+        async function handleApkUpload(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const fileName = file.name;
+            document.getElementById('apkFileName').innerHTML = 
+                `<span style="color: orange;">📁 সিলেক্টেড: ${fileName}</span>`;
+            
+            // Show progress bar
+            const progressElement = document.getElementById('apkUploadProgress');
+            const progressFill = document.getElementById('apkProgressFill');
+            const progressText = document.getElementById('apkProgressText');
+            
+            progressElement.style.display = 'block';
+            progressFill.style.width = '0%';
+            progressText.textContent = 'ফাইল প্রস্তুত...';
+
+            // Simulate progress
+            for (let i = 0; i <= 100; i += 20) {
+                await new Promise(resolve => setTimeout(resolve, 200));
+                progressFill.style.width = i + '%';
+                progressText.textContent = `প্রক্রিয়া হচ্ছে... ${i}%`;
+            }
+
+            // Show manual upload guide
+            document.getElementById('manualFileName').textContent = fileName;
+            document.getElementById('manualUploadGuide').style.display = 'block';
+            
+            // Store file info
+            window.currentUploadFile = {
+                fileName: fileName,
+                originalFile: file
+            };
+
+            progressFill.style.width = '100%';
+            progressText.textContent = 'Google Drive নির্দেশিকা দেখুন ↑';
+        }
+
+        // Process Google Drive Share Link
+        function processDriveLink() {
+            const driveLink = document.getElementById('googleDriveLink').value.trim();
+            
+            if (!driveLink) {
+                alert('দয়া করে Google Drive লিঙ্ক দিন');
+                return;
+            }
+
+            // Extract File ID from Google Drive URL
+            let fileId = '';
+            if (driveLink.includes('/file/d/')) {
+                fileId = driveLink.split('/file/d/')[1].split('/')[0];
+            } else if (driveLink.includes('id=')) {
+                fileId = driveLink.split('id=')[1].split('&')[0];
+            } else {
+                alert('❌ ভুল Google Drive লিঙ্ক! সঠিক শেয়ার লিঙ্ক দিন।');
+                return;
+            }
+
+            if (!fileId) {
+                alert('❌ File ID extract করতে পারিনি! সঠিক লিঙ্ক দিন।');
+                return;
+            }
+
+            // Create direct download link
+            const directDownloadLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            
+            // Update form
+            document.getElementById('appDownloadLink').value = directDownloadLink;
+            document.getElementById('apkFileName').innerHTML = 
+                `<span style="color: green;">✅ Google Drive লিঙ্ক verified!</span>
+                 <br><small>File ID: ${fileId}</small>`;
+            
+            // Store file ID for submission
+            document.getElementById('apkFile').dataset.driveId = fileId;
+            document.getElementById('apkFile').dataset.downloadLink = directDownloadLink;
+
+            alert('✅ Google Drive লিঙ্ক সফলভাবে verify করা হয়েছে!');
+        }
+
+        // Add App Form
+        document.getElementById('addAppForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const apkFile = document.getElementById('apkFile').files[0];
+            if (!apkFile) {
+                alert('দয়া করে APK ফাইল সিলেক্ট করুন!');
+                return;
+            }
+
+            const driveId = document.getElementById('apkFile').dataset.driveId;
+            const downloadLink = document.getElementById('appDownloadLink').value || 
+                                document.getElementById('apkFile').dataset.downloadLink || '#';
+
+            if (!downloadLink || downloadLink === '#') {
+                alert('দয়া করে Google Drive লিঙ্ক verify করুন অথবা manual download link দিন!');
+                return;
+            }
+
+            const newApp = {
+                id: Date.now(),
+                name: document.getElementById('appName').value,
+                developer: document.getElementById('appDeveloper').value,
+                description: document.getElementById('appDescription').value,
+                category: document.getElementById('appCategory').value,
+                icon: document.getElementById('appIcon').value || '📱',
+                rating: 0,
+                size: document.getElementById('appSize').value,
+                downloads: "0",
+                featured: document.getElementById('appFeatured').checked,
+                status: "active",
+                downloadLink: downloadLink,
+                version: document.getElementById('appVersion').value,
+                androidVersion: document.getElementById('appAndroidVersion').value,
+                packageName: document.getElementById('appPackageName').value,
+                apkFile: apkFile.name,
+                apkDriveId: driveId || 'manual_' + Date.now(),
+                screenshots: [],
+                createdAt: new Date().toISOString(),
+                storage: 'google_drive'
+            };
+
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            apps.push(newApp);
+            localStorage.setItem('apps', JSON.stringify(apps));
+
+            alert('✅ অ্যাপ সফলভাবে যোগ করা হয়েছে! Google Drive লিঙ্ক সেট করা হয়েছে।');
+            this.reset();
+            document.getElementById('apkFileName').textContent = '';
+            document.getElementById('manualUploadGuide').style.display = 'none';
+            document.getElementById('apkUploadProgress').style.display = 'none';
+            loadAppsTable();
+            loadDashboard();
+        });
+
+        // Settings Form
+        document.getElementById('siteSettingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const settings = {
+                siteName: document.getElementById('siteName').value,
+                siteDescription: document.getElementById('siteDescription').value,
+                bannerImage: document.getElementById('bannerImage').value
+            };
+
+            // Update admin account if password is changed
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const newEmail = document.getElementById('newEmail').value;
+
+            if (newPassword && currentPassword) {
+                if (newPassword !== confirmPassword) {
+                    alert('পাসওয়ার্ড মিলছে না!');
+                    return;
+                }
+
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const adminIndex = users.findIndex(user => user.role === 'admin');
+                
+                if (adminIndex !== -1) {
+                    if (users[adminIndex].password === currentPassword) {
+                        users[adminIndex].password = newPassword;
+                        if (newEmail) {
+                            users[adminIndex].email = newEmail;
+                        }
+                        localStorage.setItem('users', JSON.stringify(users));
+                        alert('✅ পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে!');
+                    } else {
+                        alert('❌ বর্তমান পাসওয়ার্ড ভুল!');
+                        return;
+                    }
+                }
+            }
+
+            localStorage.setItem('settings', JSON.stringify(settings));
+            alert('✅ সেটিংস সফলভাবে সংরক্ষণ করা হয়েছে!');
+        });
+
+        // App management functions
+        function editApp(appId) {
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            const app = apps.find(a => a.id === appId);
+            
+            if (app) {
+                document.getElementById('editAppId').value = app.id;
+                document.getElementById('editAppName').value = app.name;
+                document.getElementById('editAppDeveloper').value = app.developer;
+                document.getElementById('editAppDescription').value = app.description;
+                document.getElementById('editAppStatus').value = app.status;
+                document.getElementById('editAppFeatured').checked = app.featured;
+                
+                document.getElementById('editAppModal').style.display = 'flex';
+            }
+        }
+
+        function closeEditModal() {
+            document.getElementById('editAppModal').style.display = 'none';
+        }
+
+        function updateApp() {
+            const appId = parseInt(document.getElementById('editAppId').value);
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            const appIndex = apps.findIndex(a => a.id === appId);
+            
+            if (appIndex !== -1) {
+                apps[appIndex].name = document.getElementById('editAppName').value;
+                apps[appIndex].developer = document.getElementById('editAppDeveloper').value;
+                apps[appIndex].description = document.getElementById('editAppDescription').value;
+                apps[appIndex].status = document.getElementById('editAppStatus').value;
+                apps[appIndex].featured = document.getElementById('editAppFeatured').checked;
+                
+                localStorage.setItem('apps', JSON.stringify(apps));
+                alert('✅ অ্যাপ সফলভাবে আপডেট করা হয়েছে!');
+                closeEditModal();
+                loadAppsTable();
+                loadDashboard();
+            }
+        }
+
+        function deleteApp(appId) {
+            if (confirm('আপনি কি এই অ্যাপ ডিলিট করতে চান?')) {
+                const apps = JSON.parse(localStorage.getItem('apps')) || [];
+                const updatedApps = apps.filter(a => a.id !== appId);
+                localStorage.setItem('apps', JSON.stringify(updatedApps));
+                alert('✅ অ্যাপ সফলভাবে ডিলিট করা হয়েছে!');
+                loadAppsTable();
+                loadDashboard();
+            }
+        }
+
+        function deleteUser(userId) {
+            if (confirm('আপনি কি এই ব্যবহারকারী ডিলিট করতে চান?')) {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const updatedUsers = users.filter(u => u.id !== userId);
+                localStorage.setItem('users', JSON.stringify(updatedUsers));
+                alert('✅ ব্যবহারকারী সফলভাবে ডিলিট করা হয়েছে!');
+                loadUsersTable();
+                loadDashboard();
+            }
+        }
+
+        // Initialize default admin if not exists
+        function initializeDefaultAdmin() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const adminExists = users.some(user => user.role === 'admin');
+            
+            if (!adminExists) {
+                const defaultAdmin = {
+                    id: 1,
+                    name: "শাহাদাত হোসেন",
+                    email: "mdshahadat81313@gmail.com",
+                    password: "123456",
+                    role: "admin",
+                    isVerified: true,
+                    joinDate: new Date().toLocaleDateString('bn-BD')
+                };
+                users.push(defaultAdmin);
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDefaultAdmin();
+        });
+    </script>
+</body>
+</html>
