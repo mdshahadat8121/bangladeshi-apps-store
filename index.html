@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>বাংলাদেশি অ্যাপস - নিরাপদ অ্যাপ্লিকেশন সংগ্রহ</title>
+    <meta name="description" content="বাংলাদেশের ব্যবহারকারীদের জন্য নিরাপদ অ্যাপ্লিকেশন সংগ্রহ। আইনসম্মত ও ভাইরাসমুক্ত অ্যাপস ডাউনলোড করুন।">
+    <meta name="keywords" content="বাংলাদেশ অ্যাপস, অ্যাপ ডাউনলোড, বাংলা অ্যাপ, মোবাইল অ্যাপ, নিরাপদ অ্যাপ">
+    <meta name="author" content="বাংলাদেশি অ্যাপস">
+    <style>
+        :root {
+            --primary-color: #006a4e;
+            --secondary-color: #f42a41;
+            --accent-color: #ff7e00;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --text-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'SolaimanLipi', 'AdorshoLipi', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #004d38 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-flag {
+            font-size: 2rem;
+            margin-right: 8px;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-bar {
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 30px;
+            width: 350px;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-login {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-register {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        /* Ad Container Styles */
+        .ad-container {
+            text-align: center;
+            margin: 1rem auto;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .banner {
+            background: linear-gradient(rgba(0, 106, 78, 0.85), rgba(0, 77, 56, 0.9));
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .banner h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .banner p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .banner-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(5px);
+        }
+
+        .categories {
+            padding: 2rem;
+            background-color: white;
+            margin: 0 2rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .category-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .category-item {
+            background-color: #f0f8f5;
+            padding: 1rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid #e0f0ea;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-item:hover, .category-item.active {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 106, 78, 0.3);
+        }
+
+        .app-list {
+            padding: 0 2rem 2rem;
+        }
+
+        .apps {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .app-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .app-icon {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #e0f0ea, #c4e8d8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: var(--primary-color);
+        }
+
+        .app-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        .app-developer {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 1rem;
+            color: #ffa500;
+        }
+
+        .app-card p {
+            margin-bottom: 1.5rem;
+            color: #666;
+            flex-grow: 1;
+        }
+
+        .app-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 1.5rem;
+        }
+
+        .download-btn {
+            background: linear-gradient(to right, var(--primary-color), #00523d);
+            color: white;
+            border: none;
+            padding: 0.9rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-size: 1rem;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(to right, #00523d, #004030);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 106, 78, 0.3);
+        }
+
+        /* Review System Styles */
+        .review-system {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .review-form {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .star {
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: var(--transition);
+        }
+
+        .star:hover, .star.active {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .review-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 1rem;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-user {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .review-date {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .legal-notice {
+            background: #fff8e1;
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 2rem;
+            border-radius: 4px;
+        }
+
+        .footer {
+            background: linear-gradient(to right, #004030, var(--primary-color));
+            color: white;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Download Info Styles */
+        .download-info {
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .download-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: var(--border-radius);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .search-bar {
+                width: 100%;
+            }
+            .banner h1 {
+                font-size: 2rem;
+            }
+            .apps {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            .ad-container {
+                margin: 1rem;
+                padding: 0.5rem;
+            }
+            .download-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ======================= -->
+    <!-- ADSTERRA POPUNDER (27767308) -->
+    <!-- ======================= -->
+    <script type='text/javascript' src='//inwardupsettingcudgel.com/60/b5/c6/60b5c64b60c8654bf8989113f04f8285.js'></script>
+
+    <header class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <span class="logo-flag">🇧🇩</span>
+                <span id="siteName">বাংলাদেশি অ্যাপস</span>
+            </div>
+            <div class="tagline" id="siteTagline">নিরাপদ অ্যাপ্লিকেশন সংগ্রহ</div>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" placeholder="অ্যাপস সার্চ করুন..." class="search-bar" id="searchInput" />
+        </div>
+        
+        <div class="user-actions">
+            <button class="btn btn-login" onclick="showLoginForm()">লগইন</button>
+            <button class="btn btn-register" onclick="showRegisterForm()">রেজিস্টার</button>
+        </div>
+    </header>
+
+    <!-- ======================= -->
+    <!-- ADSTERRA BANNER (27767320 - 320x50) -->
+    <!-- ======================= -->
+    <div class="ad-container">
+        <div class="ad-label">বিজ্ঞাপন</div>
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '975560255d18cc46ef4449097d949088',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//inwardupsettingcudgel.com/975560255d18cc46ef4449097d949088/invoke.js"></script>
+    </div>
+
+    <section class="banner" id="bannerSection">
+        <h1 id="bannerTitle">বাংলাদেশের জন্য নিরাপদ অ্যাপ্লিকেশন</h1>
+        <p id="bannerDescription">ভাইরাসমুক্ত ও আইনসম্মত অ্যাপ্লিকেশন ডাউনলোড করুন</p>
+        
+        <div class="banner-badges">
+            <div class="badge">
+                <span>✅</span> ভাইরাসমুক্ত
+            </div>
+            <div class="badge">
+                <span>🛡️</span> নিরাপদ
+            </div>
+            <div class="badge">
+                <span>📥</span> সহজ ডাউনলোড
+            </div>
+            <div class="badge">
+                <span>🆓</span> সম্পূর্ণ ফ্রী
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Statistics -->
+    <div class="download-stats">
+        <div class="stat-item">
+            <div class="stat-number" id="totalAppCount">0</div>
+            <div class="stat-label">মোট অ্যাপস</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="totalDownloadCount">0</div>
+            <div class="stat-label">মোট ডাউনলোড</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="activeUsers">0</div>
+            <div class="stat-label">সক্রিয় ইউজার</div>
+        </div>
+    </div>
+
+    <section class="categories">
+        <h2 class="section-title">ক্যাটাগরি</h2>
+        <div class="category-list">
+            <div class="category-item active" data-category="all">
+                <span>📱</span> সব অ্যাপ
+            </div>
+            <div class="category-item" data-category="education">
+                <span>📚</span> শিক্ষা
+            </div>
+            <div class="category-item" data-category="finance">
+                <span>💳</span> ব্যাংকিং
+            </div>
+            <div class="category-item" data-category="utility">
+                <span>🛠️</span> ইউটিলিটি
+            </div>
+            <div class="category-item" data-category="entertainment">
+                <span>🎬</span> বিনোদন
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= -->
+    <!-- ADSTERRA SMARTLINK (27770492) -->
+    <!-- ======================= -->
+    <div class="ad-container">
+        <div class="ad-label">প্রস্তাবিত অ্যাপ</div>
+        <a href="https://inwardupsettingcudgel.com/mmah34032i?key=317fc5885f707e214cc235df711c7080" target="_blank" style="display: block; text-align: center; padding: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: var(--border-radius); font-weight: bold;">
+            🎯 বিশেষ অফার - এক Klick এ ডাউনলোড করুন!
+        </a>
+    </div>
+
+    <main class="app-list">
+        <h2 class="section-title">জনপ্রিয় অ্যাপস</h2>
+        <div class="apps" id="appContainer">
+            <!-- Apps will load here -->
+        </div>
+
+        <!-- Review System -->
+        <div class="review-system" id="reviewSystem" style="display: none;">
+            <h3>ব্যবহারকারী রিভিউ</h3>
+            <div class="review-form">
+                <div class="form-group">
+                    <label class="form-label">আপনার রেটিং দিন</label>
+                    <div class="star-rating">
+                        <span class="star" data-rating="1">⭐</span>
+                        <span class="star" data-rating="2">⭐</span>
+                        <span class="star" data-rating="3">⭐</span>
+                        <span class="star" data-rating="4">⭐</span>
+                        <span class="star" data-rating="5">⭐</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">আপনার রিভিউ</label>
+                    <textarea class="form-control" id="reviewText" rows="3" placeholder="অ্যাপটি সম্পর্কে আপনার মতামত..."></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="submitReview()">রিভিউ জমা দিন</button>
+            </div>
+            <div id="reviewsList"></div>
+        </div>
+
+        <!-- ======================= -->
+        <!-- ADSTERRA BANNER MIDDLE (27767320 - 320x50) -->
+        <!-- ======================= -->
+        <div class="ad-container" style="margin-top: 3rem;">
+            <div class="ad-label">বিজ্ঞাপন</div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '975560255d18cc46ef4449097d949088',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//inwardupsettingcudgel.com/975560255d18cc46ef4449097d949088/invoke.js"></script>
+        </div>
+    </main>
+
+    <!-- ======================= -->
+    <!-- ADSTERRA BANNER BOTTOM (27767320 - 320x50) -->
+    <!-- ======================= -->
+    <div class="ad-container">
+        <div class="ad-label">বিজ্ঞাপন</div>
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '975560255d18cc46ef4449097d949088',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//inwardupsettingcudgel.com/975560255d18cc46ef4449097d949088/invoke.js"></script>
+    </div>
+
+    <section class="legal-notice">
+        <h3>গুরুত্বপূর্ণ নোটিশ</h3>
+        <p>এই প্ল্যাটফর্মটি শুধুমাত্র আইনসম্মত ও নিরাপদ অ্যাপ্লিকেশন সংগ্রহ করে। কোনো অ্যাপ ডাউনলোড বা ব্যবহারের পূর্বে সংশ্লিষ্ট অ্যাপের ব্যবহারের শর্তাবলী পড়ে নিন। বাংলাদেশের আইন ও সংবিধানের প্রতি শ্রদ্ধাশীল থেকে সকল ধরনের সামগ্রী প্রদান করা হয়।</p>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 id="footerSiteName">বাংলাদেশি অ্যাপস</h3>
+                <p id="footerDescription">বাংলাদেশের ব্যবহারকারীদের জন্য নিরাপদ অ্যাপ্লিকেশন সংগ্রহ</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>দ্রুত লিংক</h3>
+                <ul class="footer-links">
+                    <li><a href="/">হোম</a></li>
+                    <li><a href="#all">সকল অ্যাপ</a></li>
+                    <li><a href="/admin.html">এডমিন প্যানেল</a></li>
+                    <li><a href="#contact">যোগাযোগ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>যোগাযোগ</h3>
+                <ul class="footer-links">
+                    <li>Apps Developer - Shahadat Hossain</li>
+                    <li>Email - mdshahadat81313@gmail.com</li>
+                    <li>নোয়াখালী, বাংলাদেশ</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; ২০২৫ <span id="copyrightName">বাংলাদেশি অ্যাপস</span>। সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>লগইন করুন</h3>
+                <button class="close-modal" onclick="closeLoginModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">ইমেইল</label>
+                    <input type="email" class="form-control" id="loginEmail">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">পাসওয়ার্ড</label>
+                    <input type="password" class="form-control" id="loginPassword">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary" onclick="showForgotPassword()" style="font-size: 0.9rem;">পাসওয়ার্ড ভুলে গেছেন?</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeLoginModal()">বাতিল</button>
+                <button class="btn btn-primary" onclick="loginUser()">লগইন</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>রেজিস্টার করুন</h3>
+                <button class="close-modal" onclick="closeRegisterModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">নাম</label>
+                    <input type="text" class="form-control" id="userName">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ইমেইল</label>
+                    <input type="email" class="form-control" id="userEmail">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">পাসওয়ার্ড</label>
+                    <input type="password" class="form-control" id="userPassword">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeRegisterModal()">বাতিল</button>
+                <button class="btn btn-primary" onclick="registerUser()">রেজিস্টার</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>পাসওয়ার্ড রিসেট</h3>
+                <button class="close-modal" onclick="closeForgotPasswordModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">ইমেইল</label>
+                    <input type="email" class="form-control" id="resetEmail">
+                </div>
+                <p style="font-size: 0.9rem; color: #666;">আপনার ইমেইলে একটি রিসেট লিংক পাঠানো হবে।</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeForgotPasswordModal()">বাতিল</button>
+                <button class="btn btn-primary" onclick="sendResetLink()">লিংক পাঠান</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Verification Modal -->
+    <div class="modal" id="verifyEmailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ইমেইল ভেরিফিকেশন</h3>
+                <button class="close-modal" onclick="closeVerifyEmailModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>আপনার ইমেইল ঠিকানায় একটি ভেরিফিকেশন কোড পাঠানো হয়েছে।</p>
+                <div class="form-group">
+                    <label class="form-label">ভেরিফিকেশন কোড</label>
+                    <input type="text" class="form-control" id="verificationCode" placeholder="৬-অঙ্কের কোড লিখুন">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeVerifyEmailModal()">বাতিল</button>
+                <button class="btn btn-primary" onclick="verifyEmail()">ভেরিফাই করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Info Modal -->
+    <div class="modal" id="downloadInfoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ডাউনলোড তথ্য</h3>
+                <button class="close-modal" onclick="closeDownloadInfoModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="download-info">
+                    <h4 id="downloadAppName" style="color: var(--primary-color); margin-bottom: 1rem;">অ্যাপ নাম</h4>
+                    <p id="downloadAppSize" style="margin-bottom: 0.5rem;">সাইজ: Loading...</p>
+                    <p id="downloadAppVersion" style="margin-bottom: 1rem;">ভার্সন: Loading...</p>
+                    <div id="downloadProgress" style="display: none;">
+                        <div class="progress-bar" style="background: #e9ecef; border-radius: 4px; height: 8px; overflow: hidden; margin: 1rem 0;">
+                            <div id="downloadProgressFill" style="height: 100%; background: var(--primary-color); width: 0%; transition: width 0.3s ease;"></div>
+                        </div>
+                        <small id="downloadProgressText">ডাউনলোড প্রস্তুত...</small>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #666; font-size: 0.9rem;">
+                    <strong>Google Drive</strong> থেকে সুরক্ষিত ডাউনলোড
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDownloadInfoModal()">বাতিল</button>
+                <button class="btn btn-primary" onclick="startDownload()" id="startDownloadBtn">ডাউনলোড শুরু করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Free Google Drive Solution - No API Keys Needed
+        const FREE_CONFIG = {
+            storage: 'google_drive',
+            method: 'manual_upload',
+            cost: 'completely_free'
+        };
+
+        // Initialize default admin account
+        function initializeAdmin() {
+            const adminAccount = {
+                email: "mdshahadat81313@gmail.com",
+                password: "123456",
+                name: "শাহাদাত হোসেন",
+                role: "admin",
+                isVerified: true,
+                joinDate: new Date().toLocaleDateString('bn-BD')
+            };
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const existingAdmin = users.find(user => user.role === 'admin');
+            
+            if (!existingAdmin) {
+                users.push(adminAccount);
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+        }
+
+        // Load settings and apps
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('settings')) || {
+                siteName: "বাংলাদেশি অ্যাপস",
+                siteDescription: "বাংলাদেশের জন্য নিরাপদ অ্যাপ্লিকেশন সংগ্রহ",
+                bannerImage: ""
+            };
+
+            document.getElementById('siteName').textContent = settings.siteName;
+            document.getElementById('siteTagline').textContent = settings.siteDescription;
+            document.getElementById('bannerTitle').textContent = settings.siteName;
+            document.getElementById('bannerDescription').textContent = settings.siteDescription;
+            document.getElementById('footerSiteName').textContent = settings.siteName;
+            document.getElementById('footerDescription').textContent = settings.siteDescription;
+            document.getElementById('copyrightName').textContent = settings.siteName;
+
+            if (settings.bannerImage) {
+                document.getElementById('bannerSection').style.backgroundImage = 
+                    `linear-gradient(rgba(0, 106, 78, 0.85), rgba(0, 77, 56, 0.9)), url('${settings.bannerImage}')`;
+            }
+        }
+
+        function loadApps() {
+            const apps = JSON.parse(localStorage.getItem('apps')) || [
+                {
+                    id: 1,
+                    name: "বাংলা টাইপিং মাস্টার",
+                    developer: "টেকনোলজি বাংলাদেশ",
+                    description: "দ্রুত ও সহজে বাংলা টাইপিং শিখুন। এই অ্যাপটি আপনাকে বাংলা টাইপিং শিখতে সাহায্য করবে।",
+                    category: "education",
+                    icon: "⌨️",
+                    rating: 4.5,
+                    size: "15 MB",
+                    downloads: "500K+",
+                    featured: true,
+                    status: "active",
+                    downloadLink: "https://drive.google.com/uc?export=download&id=example1",
+                    version: "1.0.0",
+                    androidVersion: "5.0+",
+                    packageName: "com.techbangla.typingmaster",
+                    apkDriveId: "example1",
+                    storage: "google_drive"
+                },
+                {
+                    id: 2,
+                    name: "বাংলাদেশ রেসিপি",
+                    developer: "ফুড লাভার্স",
+                    description: "বাংলাদেশের ঐতিহ্যবাহী রেসিপি সংগ্রহ। সহজে রান্না শিখুন।",
+                    category: "entertainment",
+                    icon: "🍛",
+                    rating: 4.2,
+                    size: "22 MB",
+                    downloads: "300K+",
+                    featured: false,
+                    status: "active",
+                    downloadLink: "https://drive.google.com/uc?export=download&id=example2",
+                    version: "2.1.0",
+                    androidVersion: "6.0+",
+                    packageName: "com.foodlovers.recipes",
+                    apkDriveId: "example2",
+                    storage: "google_drive"
+                }
+            ];
+            
+            const activeApps = apps.filter(app => app.status === 'active');
+            renderApps(activeApps);
+            updateStatistics();
+        }
+
+        function updateStatistics() {
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const downloadLog = JSON.parse(localStorage.getItem('downloadLog')) || [];
+            
+            document.getElementById('totalAppCount').textContent = apps.length;
+            document.getElementById('activeUsers').textContent = users.length;
+            
+            let totalDownloads = 0;
+            apps.forEach(app => {
+                const downloads = parseInt(app.downloads) || 0;
+                totalDownloads += downloads;
+            });
+            document.getElementById('totalDownloadCount').textContent = totalDownloads + 'K+';
+        }
+
+        function renderApps(apps) {
+            const appContainer = document.getElementById('appContainer');
+            appContainer.innerHTML = '';
+            
+            if (apps.length === 0) {
+                appContainer.innerHTML = '<p style="text-align: center; padding: 2rem; color: #666;">কোনো অ্যাপ পাওয়া যায়নি</p>';
+                return;
+            }
+            
+            apps.forEach(app => {
+                const appCard = document.createElement('div');
+                appCard.className = 'app-card';
+                
+                let badgeHtml = '';
+                if (app.featured) {
+                    badgeHtml = '<div class="app-badge">ফিচার্ড</div>';
+                }
+                
+                // Add Google Drive badge
+                if (app.storage === 'google_drive') {
+                    badgeHtml += '<div class="app-badge" style="top: 50px; background: #4285f4;">Google Drive</div>';
+                }
+                
+                appCard.innerHTML = `
+                    ${badgeHtml}
+                    <div class="app-icon">${app.icon}</div>
+                    <div class="app-card-content">
+                        <h3>${app.name}</h3>
+                        <div class="app-developer">${app.developer}</div>
+                        <div class="app-rating">
+                            <span>⭐</span> ${app.rating} 
+                            <small style="color: #666; margin-left: 0.5rem;">${app.version || '1.0.0'}</small>
+                        </div>
+                        <p>${app.description}</p>
+                        <div class="app-meta">
+                            <span>📦 ${app.size}</span>
+                            <span>⬇️ ${app.downloads}</span>
+                            <span>🤖 ${app.androidVersion || '5.0+'}</span>
+                        </div>
+                        <button class="download-btn" onclick="showDownloadInfo(${app.id})">
+                            📥 ডাউনলোড করুন
+                        </button>
+                    </div>
+                `;
+                appContainer.appendChild(appCard);
+            });
+
+            // Show review system if user is logged in
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                document.getElementById('reviewSystem').style.display = 'block';
+                loadReviews();
+                updateUserInterface();
+            }
+        }
+
+        // Update user interface based on login status
+        function updateUserInterface() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const userActions = document.querySelector('.user-actions');
+            
+            if (currentUser) {
+                userActions.innerHTML = `
+                    <span style="color: white; margin-right: 1rem;">${currentUser.name}</span>
+                    ${currentUser.role === 'admin' ? 
+                        '<button class="btn btn-primary" onclick="window.location.href=\'/admin.html\'">এডমিন প্যানেল</button>' : 
+                        ''
+                    }
+                    <button class="btn btn-login" onclick="logoutUser()">লগআউট</button>
+                `;
+            }
+        }
+
+        // Download Information Modal
+        let currentDownloadApp = null;
+
+        function showDownloadInfo(appId) {
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            const app = apps.find(a => a.id === appId);
+            
+            if (app) {
+                currentDownloadApp = app;
+                
+                document.getElementById('downloadAppName').textContent = app.name;
+                document.getElementById('downloadAppSize').textContent = `সাইজ: ${app.size}`;
+                document.getElementById('downloadAppVersion').textContent = `ভার্সন: ${app.version}`;
+                
+                document.getElementById('downloadInfoModal').style.display = 'flex';
+            }
+        }
+
+        function closeDownloadInfoModal() {
+            document.getElementById('downloadInfoModal').style.display = 'none';
+            currentDownloadApp = null;
+        }
+
+        function startDownload() {
+            if (!currentDownloadApp) return;
+            
+            const startBtn = document.getElementById('startDownloadBtn');
+            const progress = document.getElementById('downloadProgress');
+            const progressFill = document.getElementById('downloadProgressFill');
+            const progressText = document.getElementById('downloadProgressText');
+            
+            // Show progress
+            progress.style.display = 'block';
+            startBtn.disabled = true;
+            startBtn.textContent = 'ডাউনলোড হচ্ছে...';
+            
+            // Simulate download progress
+            let progressValue = 0;
+            const progressInterval = setInterval(() => {
+                progressValue += 5;
+                progressFill.style.width = progressValue + '%';
+                progressText.textContent = `ডাউনলোড হচ্ছে... ${progressValue}%`;
+                
+                if (progressValue >= 100) {
+                    clearInterval(progressInterval);
+                    completeDownload();
+                }
+            }, 100);
+        }
+
+        function completeDownload() {
+            if (!currentDownloadApp) return;
+            
+            // Update download count
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            const appIndex = apps.findIndex(a => a.id === currentDownloadApp.id);
+            
+            if (appIndex !== -1) {
+                const currentDownloads = parseInt(apps[appIndex].downloads) || 0;
+                apps[appIndex].downloads = (currentDownloads + 1) + 'K+';
+                localStorage.setItem('apps', JSON.stringify(apps));
+                
+                // Log download
+                const downloadLog = JSON.parse(localStorage.getItem('downloadLog')) || [];
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                
+                downloadLog.push({
+                    appId: currentDownloadApp.id,
+                    appName: currentDownloadApp.name,
+                    timestamp: new Date().toISOString(),
+                    user: currentUser?.name || 'Guest',
+                    storage: 'google_drive'
+                });
+                localStorage.setItem('downloadLog', JSON.stringify(downloadLog));
+            }
+            
+            // Open actual download link
+            if (currentDownloadApp.downloadLink && currentDownloadApp.downloadLink !== '#') {
+                window.open(currentDownloadApp.downloadLink, '_blank');
+            }
+            
+            // Show success message
+            setTimeout(() => {
+                alert(`✅ ${currentDownloadApp.name} ডাউনলোড সম্পন্ন!\n\nGoogle Drive থেকে সফলভাবে ডাউনলোড হয়েছে।`);
+                closeDownloadInfoModal();
+                loadApps(); // Refresh to update download count
+            }, 500);
+        }
+
+        // Modal functions
+        function showLoginForm() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function showRegisterForm() {
+            document.getElementById('registerModal').style.display = 'flex';
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').style.display = 'none';
+        }
+
+        function showForgotPassword() {
+            closeLoginModal();
+            document.getElementById('forgotPasswordModal').style.display = 'flex';
+        }
+
+        function closeForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').style.display = 'none';
+        }
+
+        function closeVerifyEmailModal() {
+            document.getElementById('verifyEmailModal').style.display = 'none';
+        }
+
+        // User authentication
+        function loginUser() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                alert('দয়া করে ইমেইল এবং পাসওয়ার্ড লিখুন।');
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                if (!user.isVerified && user.role !== 'admin') {
+                    alert('দয়া করে প্রথমে আপনার ইমেইল ভেরিফাই করুন।');
+                    return;
+                }
+                
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                alert('✅ সফলভাবে লগইন হয়েছে!');
+                closeLoginModal();
+                location.reload();
+            } else {
+                alert('❌ ভুল ইমেইল বা পাসওয়ার্ড!');
+            }
+        }
+
+        function registerUser() {
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            const password = document.getElementById('userPassword').value;
+            
+            if (!name || !email || !password) {
+                alert('দয়া করে সব তথ্য পূরণ করুন।');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।');
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const existingUser = users.find(user => user.email === email);
+            
+            if (existingUser) {
+                alert('এই ইমেইল already registered!');
+                return;
+            }
+            
+            const newUser = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                password: password,
+                role: "user",
+                isVerified: false,
+                verificationCode: Math.floor(100000 + Math.random() * 900000).toString(),
+                joinDate: new Date().toLocaleDateString('bn-BD')
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('pendingVerification', JSON.stringify(newUser));
+            
+            // In a real app, you would send the verification code via email
+            // For demo, we'll show it in alert
+            alert(`ভেরিফিকেশন কোড: ${newUser.verificationCode}\n\nডেমো উদ্দেশ্যে: এই কোডটি ব্যবহার করে ভেরিফাই করুন।`);
+            
+            closeRegisterModal();
+            document.getElementById('verifyEmailModal').style.display = 'flex';
+        }
+
+        function verifyEmail() {
+            const code = document.getElementById('verificationCode').value;
+            const pendingUser = JSON.parse(localStorage.getItem('pendingVerification'));
+            
+            if (!pendingUser) {
+                alert('কোনো পেন্ডিং ভেরিফিকেশন নেই।');
+                return;
+            }
+            
+            if (code === pendingUser.verificationCode) {
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const userIndex = users.findIndex(u => u.id === pendingUser.id);
+                
+                if (userIndex !== -1) {
+                    users[userIndex].isVerified = true;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    localStorage.setItem('currentUser', JSON.stringify(users[userIndex]));
+                    localStorage.removeItem('pendingVerification');
+                    
+                    alert('✅ ইমেইল সফলভাবে ভেরিফাই হয়েছে!');
+                    closeVerifyEmailModal();
+                    location.reload();
+                }
+            } else {
+                alert('❌ ভুল ভেরিফিকেশন কোড!');
+            }
+        }
+
+        function sendResetLink() {
+            const email = document.getElementById('resetEmail').value;
+            
+            if (!email) {
+                alert('দয়া করে ইমেইল লিখুন।');
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email);
+            
+            if (user) {
+                // In a real app, you would send an email with reset link
+                alert(`পাসওয়ার্ড রিসেট লিংক ${email} এ পাঠানো হয়েছে।\n\nডেমো: এডমিন প্যানেলে গিয়ে পাসওয়ার্ড পরিবর্তন করুন।`);
+                closeForgotPasswordModal();
+            } else {
+                alert('❌ এই ইমেইলে কোনো অ্যাকাউন্ট নেই!');
+            }
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('currentUser');
+            alert('✅ সফলভাবে লগআউট হয়েছে!');
+            location.reload();
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const apps = JSON.parse(localStorage.getItem('apps')) || [];
+            const activeApps = apps.filter(app => app.status === 'active');
+            const filteredApps = activeApps.filter(app => 
+                app.name.toLowerCase().includes(searchTerm) || 
+                app.description.toLowerCase().includes(searchTerm) ||
+                app.developer.toLowerCase().includes(searchTerm)
+            );
+            renderApps(filteredApps);
+        });
+
+        // Category filtering
+        document.querySelectorAll('.category-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.category-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                const apps = JSON.parse(localStorage.getItem('apps')) || [];
+                const activeApps = apps.filter(app => app.status === 'active');
+                
+                if (category === 'all') {
+                    renderApps(activeApps);
+                } else {
+                    const filteredApps = activeApps.filter(app => app.category === category);
+                    renderApps(filteredApps);
+                }
+            });
+        });
+
+        // Star rating functionality
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.dataset.rating;
+                document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+                let current = this;
+                while (current = current.previousElementSibling) {
+                    current.classList.add('active');
+                }
+            });
+        });
+
+        // Review system
+        function submitReview() {
+            const rating = document.querySelector('.star.active')?.dataset.rating || 0;
+            const reviewText = document.getElementById('reviewText').value;
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser) {
+                alert('দয়া করে প্রথমে লগইন করুন।');
+                return;
+            }
+            
+            if (rating === 0 || !reviewText.trim()) {
+                alert('দয়া করে রেটিং এবং রিভিউ লিখুন।');
+                return;
+            }
+            
+            const review = {
+                id: Date.now(),
+                rating: parseInt(rating),
+                text: reviewText,
+                date: new Date().toLocaleDateString('bn-BD'),
+                user: currentUser.name,
+                userId: currentUser.id
+            };
+            
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            reviews.push(review);
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+            
+            alert('✅ রিভিউ সফলভাবে জমা দেওয়া হয়েছে!');
+            document.getElementById('reviewText').value = '';
+            document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
+            loadReviews();
+        }
+
+        function loadReviews() {
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            const reviewsList = document.getElementById('reviewsList');
+            
+            if (reviews.length === 0) {
+                reviewsList.innerHTML = '<p style="text-align: center; color: #666;">কোনো রিভিউ নেই। প্রথম রিভিউ দিন!</p>';
+                return;
+            }
+            
+            reviewsList.innerHTML = reviews.map(review => `
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-user">${review.user}</span>
+                        <span class="review-date">${review.date}</span>
+                    </div>
+                    <div class="app-rating">
+                        ${'⭐'.repeat(review.rating)}
+                    </div>
+                    <p>${review.text}</p>
+                </div>
+            `).join('');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAdmin();
+            loadSettings();
+            loadApps();
+            updateUserInterface();
+            
+            // Auto-refresh every 5 seconds
+            setInterval(() => {
+                loadSettings();
+                loadApps();
+            }, 5000);
+
+            // Close modal when clicking outside
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
